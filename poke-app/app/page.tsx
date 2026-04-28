@@ -13,10 +13,12 @@ export default function HomePage() {
     setPokemon(null)
 
     try {
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
-      
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+      )
+
       if (!res.ok) {
-        throw new Error("Pokemon not found")
+        throw new Error("Pokémon not found")
       }
 
       const data = await res.json()
@@ -27,23 +29,48 @@ export default function HomePage() {
   }
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>Pokémon Search</h1>
+    <main className="min-h-screen bg-gradient-to-br from-red-900 via-purple-900 to-blue-900 flex flex-col items-center px-4 py-10">
+      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-8">
+        <h1 className="text-4xl font-bold text-center mb-2 text-gray-900">
+          Pokémon Search
+        </h1>
 
-      <input
-        type="text"
-        placeholder="Enter Pokémon name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+        <p className="text-center text-gray-700 mb-8">
+          Search for any Pokémon by name
+        </p>
 
-      <button onClick={getPokemon} style={{ marginLeft: "1rem" }}>
-        Search
-      </button>
+        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Enter Pokémon name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="flex-1 px-4 py-3 border border-gray-400 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+          <button
+            onClick={getPokemon}
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition"
+          >
+            Search
+          </button>
+        </div>
 
-      {pokemon && <PokemonCard data={pokemon} />}
-    </div>
+        {error && (
+          <p className="text-red-700 text-center font-semibold mb-4">
+            {error}
+          </p>
+        )}
+
+        {pokemon && (
+          <div className="mt-6">
+            <PokemonCard data={pokemon} />
+          </div>
+        )}
+      </div>
+      <a href="/TeamBuilder" className="mt-8 text-lg text-gray-200 hover:text-gray-400 transition">
+        Go to Team Builder
+      </a>
+    </main>
   )
 }

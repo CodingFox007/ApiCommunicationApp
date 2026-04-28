@@ -4,29 +4,31 @@ type Props = {
 
 export default function PokemonCard({ data }: Props) {
   return (
-    <div style={{
-      border: "1px solid #ccc",
-      padding: "1rem",
-      marginTop: "1rem",
-      borderRadius: "10px",
-      maxWidth: "300px"
-    }}>
-      <h2 style={{ textTransform: "capitalize" }}>
+    <div className="border border-gray-300 rounded-xl shadow-md p-6 max-w-sm mx-auto bg-gray-50 text-gray-900">
+      <h2 className="text-2xl font-bold capitalize text-center mb-4">
         {data.name}
       </h2>
 
       <img
         src={data.sprites.front_default}
         alt={data.name}
+        className="mx-auto w-32 h-32"
       />
 
-      <p><strong>Height:</strong> {data.height}</p>
-      <p><strong>Weight:</strong> {data.weight}</p>
+      <div className="mt-4 space-y-2 text-lg">
+        <p>
+          <span className="font-semibold">Height:</span> {data.height}
+        </p>
 
-      <p>
-        <strong>Type:</strong>{" "}
-        {data.types.map((t: any) => t.type.name).join(", ")}
-      </p>
+        <p>
+          <span className="font-semibold">Weight:</span> {data.weight}
+        </p>
+
+        <p>
+          <span className="font-semibold">Type:</span>{" "}
+          {data.types.map((t: any) => t.type.name).join(", ")}
+        </p>
+      </div>
     </div>
   )
 }
