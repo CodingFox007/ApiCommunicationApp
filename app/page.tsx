@@ -28,8 +28,67 @@ export default function HomePage() {
     }
   }
 
+  const typeColors: Record<string, string> = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
+}
+
+const darkenColor = (hex: string, amount: number) => {
+  let col = hex.replace("#", "")
+  let num = parseInt(col, 16)
+
+  let r = Math.max(0, (num >> 16) - amount)
+  let g = Math.max(0, ((num >> 8) & 0x00ff) - amount)
+  let b = Math.max(0, (num & 0x0000ff) - amount)
+
+  return `rgb(${r}, ${g}, ${b})`
+}
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-red-900 via-purple-900 to-blue-900 flex flex-col items-center px-4 py-10">
+    <main
+  className="min-h-screen flex flex-col items-center px-4 py-10 transition-all duration-500"
+  style={ pokemon ? (() => {
+          const types = pokemon.types.map((t: any) => t.type.name)
+
+          if (types.length === 1) {
+            const color = typeColors[types[0]]
+
+            return {
+              background: `linear-gradient(to bottom right, ${color}, ${darkenColor(
+                color,
+                80
+              )})`,
+            }
+          }
+
+          return {
+            background: `linear-gradient(to bottom right, ${
+              typeColors[types[0]]
+            }, ${typeColors[types[1]]})`,
+          }
+        })()
+      : {
+          background:
+            "linear-gradient(to bottom right, #7f1d1d, #4c1d95, #1e3a8a)",
+        }
+  }
+>
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-8">
         <h1 className="text-4xl font-bold text-center mb-2 text-gray-900">
           Pokémon Search
@@ -68,7 +127,7 @@ export default function HomePage() {
           </div>
         )}
       </div>
-      <a href="/TeamBuilder" className="mt-8 text-lg text-gray-200 hover:text-gray-400 transition">
+      <a href="/TeamBuilder" className="mt-8 text-lg text-gray-200 hover:text-blac transition">
         Go to Team Builder
       </a>
     </main>
