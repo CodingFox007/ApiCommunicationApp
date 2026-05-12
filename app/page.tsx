@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import PokemonCard from "../components/PokeCard"
 
 export default function HomePage() {
@@ -130,6 +131,10 @@ const darkenColor = (hex: string, amount: number) => {
       <a href="/TeamBuilder" className="mt-8 text-lg text-gray-200 hover:text-blac transition">
         Go to Team Builder
       </a>
+      <Link href={`/pokemon/${pokemon.name}`}>
+        View Details
+      </Link>
     </main>
+    
   )
 }
