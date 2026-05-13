@@ -10,24 +10,24 @@ export default function TeamBuilderPage() {
   const [error, setError] = useState("")
 
   const searchPokemon = async () => {
-    setError("")
-    setPokemon(null)
+  setError("")
+  setPokemon(null)
 
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_POKE_API}/pokemon/${search.toLowerCase()}`
-      )
+  try {
+    const res = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`
+    )
 
-      if (!res.ok) {
-        throw new Error("Pokémon not found")
-      }
-
-      const data = await res.json()
-      setPokemon(data)
-    } catch (err: any) {
-      setError(err.message)
+    if (!res.ok) {
+      throw new Error("Pokémon not found")
     }
+
+    const data = await res.json()
+    setPokemon(data)
+  } catch (err: any) {
+    setError(err.message)
   }
+}
 
   const addToTeam = (poke: any) => {
     if (team.length >= 6) return
