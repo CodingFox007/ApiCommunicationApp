@@ -25,7 +25,7 @@ export default function Dashboard() {
     <div style={{ padding: "2rem" }}>
       <h1>Dashboard</h1>
       <p>This page is protected 👮</p>
-      //lil cop to protect the page
+      {/* /lil cop to protect the page, he will do his best to stop any unauthorized access */}
     </div>
   )
 }
