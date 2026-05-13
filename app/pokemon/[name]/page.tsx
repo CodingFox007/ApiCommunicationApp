@@ -85,7 +85,7 @@ export default function PokemonDetails() {
     >
       <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center">
   
-        <h1 className="text-4xl font-bold capitalize mb-4">
+        <h1 className="text-4xl font-bold capitalize mb-4 text-black">
           {pokemon.name}
         </h1>
 
@@ -95,12 +95,11 @@ export default function PokemonDetails() {
           className="mx-auto w-40 h-40"
         />
 
-        <p className="text-gray-700 mt-4 mb-6">
+        <p className="text-black mt-4 mb-6">
           {description.replace(/\f/g, " ")}
         </p>
 
-        {/* Stats */}
-        <div className="text-left space-y-2">
+        <div className="text-left space-y-2 text-black">
           <p>
             <strong>Height:</strong> {pokemon.height}
           </p>
@@ -110,6 +109,48 @@ export default function PokemonDetails() {
           <p>
             <strong>Types:</strong>{" "}
             {types.join(", ")}
+          </p>
+          <p>
+            <strong>Abilities:</strong>{" "}
+            {pokemon.abilities
+              .map((a: any) => a.ability.name)
+              .join(", ")}
+          </p>
+          <p>
+            <strong>Base Experience:</strong>{" "}
+            {pokemon.base_experience}
+          </p>
+          <p>
+            <strong>Stats:</strong>
+            <ul className="list-disc list-inside">
+              {pokemon.stats.map((s: any) => (
+                <li key={s.stat.name}>
+                  <strong>{s.stat.name}:</strong> {s.base_stat}
+                </li>
+              ))}
+            </ul>
+          </p>
+          <p>
+            <strong>Moves:</strong>{" "}
+            {pokemon.moves
+              .slice(0, 5)
+                .map((m: any) => m.move.name)
+                .join(", ")}{" "}
+          </p>
+          <p>
+            <strong>Held Items:</strong>{" "}
+            {pokemon.held_items.length > 0
+              ? pokemon.held_items
+                    .map((i: any) => i.item.name)
+                    .join(", ")
+                : "None"}
+          </p>
+          <p>
+            <strong>Game Indices:</strong>{" "}
+            {pokemon.game_indices
+              .slice(0, 5)
+                .map((g: any) => g.version.name)
+                .join(", ")}{" "}
           </p>
         </div>
 
