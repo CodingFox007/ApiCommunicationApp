@@ -1,4 +1,9 @@
 export const users = [
-  { username: "admin", password: "1234" },
-  { username: "student", password: "abcd" },
+  { username: "Professor Oak", password: "1996" },
+  { username: "Ash Ketchum", password: "pikachu" },
+  { username: "Misty", password: "blastoise" },
+  { username: "Brock", password: "onix" },
+  { username: "Team Rocket", password: "meowth" },
+  { username: "Gary Oak", password: "eevee" },
+  { username: "Nurse Joy", password: "chansey" },
 ]
