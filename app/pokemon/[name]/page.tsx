@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 export default function PokemonDetails() {
   const { name } = useParams()
@@ -10,16 +10,24 @@ export default function PokemonDetails() {
   const [description, setDescription] = useState("")
   const [loading, setLoading] = useState(true)
 
+  const router = useRouter()
+
+    useEffect(() => {
+    const loggedIn = localStorage.getItem("loggedIn")
+
+    if (!loggedIn) {
+        router.push("/login")
+    }
+    }, [])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 1. Pokémon data
         const res1 = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${name}`
         )
         const data1 = await res1.json()
 
-        // 2. Species data (description)
         const res2 = await fetch(
           `https://pokeapi.co/api/v2/pokemon-species/${name}`
         )
