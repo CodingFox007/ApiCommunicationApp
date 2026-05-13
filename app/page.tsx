@@ -131,9 +131,11 @@ const darkenColor = (hex: string, amount: number) => {
       <a href="/TeamBuilder" className="mt-8 text-lg text-gray-200 hover:text-blac transition">
         Go to Team Builder
       </a>
+      {pokemon && (
       <Link href={`/pokemon/${pokemon.name}`}>
         View Details
       </Link>
+    )}
     </main>
     
   )
